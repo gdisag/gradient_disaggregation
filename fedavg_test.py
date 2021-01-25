@@ -79,7 +79,7 @@ def get_batched_grad_fedavg(user_dataset, local_batchsize, net, epochs=10, momen
     user_dataset = [user_dataset[i] for i in user_dataset_indices]
 
     for i in range(epochs):
-        #np.random.shuffle(user_dataset)
+        np.random.shuffle(user_dataset)
         for j in range(0, len(user_dataset), local_batchsize):
 
             end = min(j+local_batchsize, len(user_dataset))
@@ -100,10 +100,10 @@ def get_batched_grad_fedavg(user_dataset, local_batchsize, net, epochs=10, momen
     
     return diff
 
-def get_batched_grad(user, batchsize, epochs, net, fedavg=True, momentum=0, lr=1e-3):
+def get_batched_grad(user, batchsize, epochs, net, fedavg=True, momentum=0, lr=1e-2):
     return get_batched_grad_fedavg(user, batchsize, net, epochs=epochs, momentum=momentum, lr=lr)
 
-def aggregate_grads(P, user_datasets, batchsize, epochs, momentum=0, lr=1e-3):
+def aggregate_grads(P, user_datasets, batchsize, epochs, momentum=0, lr=1e-2):
 
     copied_net = copy.deepcopy(net)
 
@@ -124,8 +124,8 @@ if __name__ == "__main__":
     n_users = 20
     n_rounds = 60
     dataset_size_per_user = 64
-    batchsize = 64
-    epochs = 1
+    batchsize = 16
+    epochs = 4
     granularity = 10
 
     user_datasets = get_user_datasets(n_users, dataset_size_per_user)
