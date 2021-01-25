@@ -11,11 +11,7 @@ We break the secure aggregation protocol of federated learning by showing that i
 ## Requirements
 
 ```python
-pip install scipy numpy
-```
-
-```python
-python -m pip install -i https://pypi.gurobi.com gurobipy
+pip install scipy numpy gurobipy
 ```
 
 ## Quickstart - Reconstructing Participant Matrix P
